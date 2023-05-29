@@ -1,5 +1,5 @@
-import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:vida_leve/pages/anamnese_geral.dart';
 import 'package:vida_leve/pages/perfil_paciente_page.dart';
@@ -7,6 +7,10 @@ import 'package:vida_leve/utils/appbar.dart';
 import 'package:vida_leve/utils/drawer.dart';
 import 'package:vida_leve/utils/global.dart';
 import 'package:http/http.dart' as http;
+
+
+import '../utils/dados.dart';
+
 
 class Pacientes extends StatefulWidget {
   @override
@@ -17,35 +21,9 @@ class _PacientesState extends State<Pacientes> {
   TextEditingController _searchController =
       TextEditingController(); // Novo controller
 
-  Future<List<dynamic>> getPacientesFromFirebase() async {
-    final response = await http.get(Uri.parse('https://loginfirebase-fe7e7-default-rtdb.firebaseio.com/pacientes.json'));
-
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = json.decode(response.body);
-      final List<dynamic> pacientes = [];
-
-      data.forEach((key, value) {
-        pacientes.add(value);
-      });
-
-      return pacientes;
-    } else {
-      throw Exception('Erro ao obter dados do Firebase. Status code: ${response.statusCode}');
-    }
-  }
-
   void initState() {
     super.initState();
     Globals.isEditing = false;
-
-    getPacientesFromFirebase().then((pacientes) {
-      setState(() {
-        dados = pacientes;
-        filteredPacientes = dados;
-      });
-    }).catchError((error) {
-      print('Erro ao obter pacientes do Firebase: $error');
-    });
   }
 
   @override
@@ -54,14 +32,16 @@ class _PacientesState extends State<Pacientes> {
     super.dispose();
   }
 
-  List<dynamic> dados = [];
-  List<dynamic> filteredPacientes = []; // Lista de pacientes filtrada
+  List<dynamic> filteredPacientes =
+      dados; // Lista filtrada inicialmente igual à lista completa
 
   void filterPacientes(String query) {
     setState(() {
       filteredPacientes = dados.where((paciente) {
-        final nome = paciente['nomeCompleto'].toString().toLowerCase();
-        return nome.contains(query.toLowerCase());
+        // Realiza a filtragem com base no nome do paciente
+        final String nome = paciente['nomeCompleto'].toString().toLowerCase();
+        final String lowercaseQuery = query.toLowerCase();
+        return nome.contains(lowercaseQuery);
       }).toList();
     });
   }
@@ -94,9 +74,8 @@ class _PacientesState extends State<Pacientes> {
                   padding: const EdgeInsets.only(right: 6),
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: const Color.fromRGBO(0, 168, 150, 100),
-                    ),
+                        borderRadius: BorderRadius.circular(50),
+                        color: const Color.fromRGBO(0, 168, 150, 100)),
                     child: IconButton(
                       icon: const Icon(Icons.add),
                       iconSize: 30,
@@ -114,7 +93,8 @@ class _PacientesState extends State<Pacientes> {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: TextField(
-              controller: _searchController, // Atribua o controller ao TextField
+              controller:
+                  _searchController, // Atribua o controller ao TextField
               onChanged: filterPacientes,
               decoration: InputDecoration(
                 hintText: 'Pesquisar...',

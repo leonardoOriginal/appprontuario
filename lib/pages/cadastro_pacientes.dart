@@ -1,9 +1,13 @@
+import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:vida_leve/utils/appbar.dart';
 import 'package:vida_leve/utils/dados.dart';
 import 'package:vida_leve/utils/drawer.dart';
+import 'package:http/http.dart' as http;
+
 
 import '../utils/customtextfield_cadastro.dart';
 
@@ -247,7 +251,7 @@ class _CadastroPacientesState extends State<CadastroPacientes> {
               padding: const EdgeInsets.only(bottom: 15, top: 5),
               child: ElevatedButton(
                 onPressed: () {
-                  Map<String, String> novoElemento = {
+                  Map<String, dynamic> novoElemento = {
                     'id': dados.length.toString(),
                     'foto': fotoController.text,
                     'email': emailController.text,
@@ -271,10 +275,32 @@ class _CadastroPacientesState extends State<CadastroPacientes> {
                     'telefoneCelular': telefoneCelularController.text,
                     'escolaridade': escolaridadeController.text,
                   };
+                  String jsonData = jsonEncode(novoElemento);
 
-                  dados.add(novoElemento);
+                  Future<void> enviarDadosParaFirebase(String jsonData) async {
+                    try {
+                      final response = await http.post(
+                        Uri.parse('https://loginfirebase-fe7e7-default-rtdb.firebaseio.com/pacientes.json'),
+                        body: jsonData,
+                      );
 
-                  Navigator.pushReplacementNamed(context, "/pacientes");
+                      if (response.statusCode == 200) {
+                        // Dados enviados com sucesso
+                        print('Dados enviados para o Firebase com sucesso!');
+                        Navigator.pushReplacementNamed(context, "/pacientes");
+                      } else {
+                        // Lidar com erros de envio para o Firebase
+                        print('Erro ao enviar dados para o Firebase. Status code: ${response.statusCode}');
+                      }
+                    } catch (e) {
+                      // Lidar com erros de envio para o Firebase
+                      print('Erro ao enviar dados para o Firebase: $e');
+                    }
+                  }
+
+                  enviarDadosParaFirebase(jsonData);
+
+                  //Navigator.pushReplacementNamed(context, "/pacientes");
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(

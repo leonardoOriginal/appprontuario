@@ -1,75 +1,142 @@
+import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:vida_leve/pages/anamnese_geral.dart';
 import 'package:vida_leve/utils/customtextfield.dart';
-import 'package:vida_leve/utils/dados.dart';
 import 'package:vida_leve/utils/drawer.dart';
 import 'package:vida_leve/utils/global.dart';
 
 import '../utils/appbar.dart';
 
 class PerfilPaciente extends StatefulWidget {
-  const PerfilPaciente({super.key});
+  const PerfilPaciente({Key? key}) : super(key: key);
 
   @override
-  State<PerfilPaciente> createState() => _PerfilPacienteState();
+  _PerfilPacienteState createState() => _PerfilPacienteState();
 }
 
 class _PerfilPacienteState extends State<PerfilPaciente> {
-  final pacienteId = Globals.pacienteId;
-  TextEditingController emailController = TextEditingController();
-  TextEditingController nomeCompletoController = TextEditingController();
-  TextEditingController dataNascimentoController = TextEditingController();
-  TextEditingController idadeController = TextEditingController();
-  TextEditingController generoController = TextEditingController();
-  TextEditingController profissaoController = TextEditingController();
-  TextEditingController estadoCivilController = TextEditingController();
-  TextEditingController etniaController = TextEditingController();
-  TextEditingController religiaoController = TextEditingController();
-  TextEditingController naturalidadeController = TextEditingController();
-  TextEditingController enderecoController = TextEditingController();
-  TextEditingController complementoController = TextEditingController();
-  TextEditingController bairroController = TextEditingController();
-  TextEditingController cidadeController = TextEditingController();
-  TextEditingController estadoController = TextEditingController();
+  late TextEditingController emailController;
+  late TextEditingController nomeCompletoController;
+  late TextEditingController dataNascimentoController;
+  late TextEditingController idadeController;
+  late TextEditingController generoController;
+  late TextEditingController profissaoController;
+  late TextEditingController estadoCivilController;
+  late TextEditingController etniaController;
+  late TextEditingController religiaoController;
+  late TextEditingController naturalidadeController;
+  late TextEditingController enderecoController;
+  late TextEditingController complementoController;
+  late TextEditingController bairroController;
+  late TextEditingController cidadeController;
+  late TextEditingController estadoController;
+  late TextEditingController telefoneResidencialController;
+  late TextEditingController telefoneCelularController;
+  late TextEditingController alturaController;
+  late TextEditingController pesoController;
 
-  TextEditingController telefoneResidencialController = TextEditingController();
-  TextEditingController telefoneCelularController = TextEditingController();
-  TextEditingController alturaController = TextEditingController();
-  TextEditingController pesoController = TextEditingController();
+  late Map<String, dynamic> pacienteData;
+  late bool isEditing;
 
-  String getInitialValue(Map<String, dynamic> data, String key) {
-    return data[key] != null ? data[key].toString() : '';
+  Future<Map<String, dynamic>> getPacienteFromFirebase() async {
+    final response = await http.get(Uri.parse('https://loginfirebase-fe7e7-default-rtdb.firebaseio.com/pacientes/${Globals.pacienteId}.json'));
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Erro ao obter dados do Firebase. Status code: ${response.statusCode}');
+    }
   }
 
-  void _toggleEditing() {
-    if (Globals.isEditing) {
-      dados[pacienteId]['email'] = emailController.text;
-      dados[pacienteId]['dataNascimento'] = dataNascimentoController.text;
-      dados[pacienteId]['idade'] = idadeController.text;
-      dados[pacienteId]['genero'] = generoController.text;
-      dados[pacienteId]['profissao'] = profissaoController.text;
-      dados[pacienteId]['estadoCivil'] = estadoCivilController.text;
-      dados[pacienteId]['etnia'] = etniaController.text;
-      dados[pacienteId]['religiao'] = religiaoController.text;
-      dados[pacienteId]['naturalidade'] = naturalidadeController.text;
-      dados[pacienteId]['endereco'] = enderecoController.text;
-      dados[pacienteId]['bairro'] = bairroController.text;
-      dados[pacienteId]['cidade'] = cidadeController.text;
-            dados[pacienteId]['altura'] = alturaController.text;
-      dados[pacienteId]['peso'] = pesoController.text;
-      dados[pacienteId]['telefoneResidencial'] =
-          telefoneResidencialController.text;
-      dados[pacienteId]['telefoneCelular'] = telefoneCelularController.text;
-      
+  void initState() {
+    super.initState();
+    isEditing = false;
 
+    getPacienteFromFirebase().then((paciente) {
       setState(() {
+        pacienteData = paciente;
+        initializeControllers(pacienteData);
+      });
+    }).catchError((error) {
+      print('Erro ao obter dados do Firebase: $error');
+    });
+  }
+
+  void initializeControllers(Map<String, dynamic> data) {
+    emailController = TextEditingController(text: data['email']);
+    nomeCompletoController = TextEditingController(text: data['nomeCompleto']);
+    dataNascimentoController = TextEditingController(text: data['dataNascimento']);
+    idadeController = TextEditingController(text: data['idade']);
+    generoController = TextEditingController(text: data['genero']);
+    profissaoController = TextEditingController(text: data['profissao']);
+    estadoCivilController = TextEditingController(text: data['estadoCivil']);
+    etniaController = TextEditingController(text: data['etnia']);
+    religiaoController = TextEditingController(text: data['religiao']);
+    naturalidadeController = TextEditingController(text: data['naturalidade']);
+    enderecoController = TextEditingController(text: data['endereco']);
+    complementoController = TextEditingController(text: data['complemento']);
+    bairroController = TextEditingController(text: data['bairro']);
+    cidadeController = TextEditingController(text: data['cidade']);
+    estadoController = TextEditingController(text: data['estado']);
+    telefoneResidencialController = TextEditingController(text: data['telefoneResidencial']);
+    telefoneCelularController = TextEditingController(text: data['telefoneCelular']);
+    alturaController = TextEditingController(text: data['altura']);
+    pesoController = TextEditingController(text: data['peso']);
+  }
+
+  void toggleEditing() {
+    if (isEditing) {
+      // Salvar as alterações no Firebase
+      pacienteData['email'] = emailController.text;
+      pacienteData['dataNascimento'] = dataNascimentoController.text;
+      pacienteData['idade'] = idadeController.text;
+      pacienteData['genero'] = generoController.text;
+      pacienteData['profissao'] = profissaoController.text;
+      pacienteData['estadoCivil'] = estadoCivilController.text;
+      pacienteData['etnia'] = etniaController.text;
+      pacienteData['religiao'] = religiaoController.text;
+      pacienteData['naturalidade'] = naturalidadeController.text;
+      pacienteData['endereco'] = enderecoController.text;
+      pacienteData['complemento'] = complementoController.text;
+      pacienteData['bairro'] = bairroController.text;
+      pacienteData['cidade'] = cidadeController.text;
+      pacienteData['estado'] = estadoController.text;
+      pacienteData['telefoneResidencial'] = telefoneResidencialController.text;
+      pacienteData['telefoneCelular'] = telefoneCelularController.text;
+      pacienteData['altura'] = alturaController.text;
+      pacienteData['peso'] = pesoController.text;
+
+      updatePacienteOnFirebase(pacienteData).then((_) {
+        setState(() {
+          isEditing = false;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.green,
+              content: Text(
+                'Atualizações salvas',
+                textAlign: TextAlign.center,
+              ),
+              duration: Duration(seconds: 3),
+              action: SnackBarAction(
+                label: 'X',
+                textColor: Colors.white,
+                onPressed: () {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                },
+              ),
+            ),
+          );
+        });
+      }).catchError((error) {
+        print('Erro ao atualizar dados no Firebase: $error');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.red,
             content: Text(
-              'Atualizações feitas',
+              'Erro ao salvar as atualizações',
               textAlign: TextAlign.center,
             ),
             duration: Duration(seconds: 3),
@@ -82,33 +149,52 @@ class _PerfilPacienteState extends State<PerfilPaciente> {
             ),
           ),
         );
-
-        Globals.isEditing = false;
       });
     } else {
       setState(() {
-        Globals.isEditing = true;
+        isEditing = true;
       });
+    }
+  }
+
+  Future<void> updatePacienteOnFirebase(Map<String, dynamic> pacienteData) async {
+    final response = await http.put(
+      Uri.parse('https://loginfirebase-fe7e7-default-rtdb.firebaseio.com/pacientes/${Globals.pacienteId}.json'),
+      body: json.encode(pacienteData),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Erro ao atualizar dados no Firebase. Status code: ${response.statusCode}');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        endDrawer: MyDrawer(),
+    if (pacienteData == null) {
+      return Scaffold(
         appBar: MyAppBar(),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
-              child: Column(children: [
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    return Scaffold(
+      endDrawer: MyDrawer(),
+      appBar: MyAppBar(),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+            child: Column(
+              children: [
                 CircleAvatar(
-                    radius: 45, // Define o raio do avatar
-                    backgroundImage:
-                        NetworkImage(dados[pacienteId]['foto'].toString())),
+                  radius: 45,
+                  backgroundImage: NetworkImage(pacienteData['foto'].toString()),
+                ),
                 SizedBox(height: 15),
                 Text(
-                  dados[pacienteId]['nomeCompleto'].toString(),
+                  pacienteData['nomeCompleto'].toString(),
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.w900,
@@ -134,8 +220,8 @@ class _PerfilPacienteState extends State<PerfilPaciente> {
                       child: CustomTextField(
                         labelText: "Data de Nascimento",
                         controller: dataNascimentoController,
-                        initialValue: getInitialValue(
-                            dados[pacienteId], 'dataNascimento'),
+                        initialValue: getInitialValue(pacienteData, 'dataNascimento'),
+                        //enabled: isEditing,
                       ),
                     ),
                     Expanded(
@@ -143,8 +229,8 @@ class _PerfilPacienteState extends State<PerfilPaciente> {
                       child: CustomTextField(
                         labelText: "Idade",
                         controller: idadeController,
-                        initialValue:
-                            getInitialValue(dados[pacienteId], 'idade'),
+                        initialValue: getInitialValue(pacienteData, 'idade'),
+                        //enabled: isEditing,
                       ),
                     ),
                   ],
@@ -156,17 +242,17 @@ class _PerfilPacienteState extends State<PerfilPaciente> {
                       child: CustomTextField(
                         labelText: "Naturalidade",
                         controller: naturalidadeController,
-                        initialValue:
-                            getInitialValue(dados[pacienteId], 'naturalidade'),
+                        initialValue: getInitialValue(pacienteData, 'naturalidade'),
+                        //enabled: isEditing,
                       ),
                     ),
                     Expanded(
                       flex: 4,
                       child: CustomTextField(
-                        labelText: "Genero",
+                        labelText: "Gênero",
                         controller: generoController,
-                        initialValue:
-                            getInitialValue(dados[pacienteId], 'genero'),
+                        initialValue: getInitialValue(pacienteData, 'genero'),
+                        //enabled: isEditing,
                       ),
                     ),
                   ],
@@ -178,8 +264,8 @@ class _PerfilPacienteState extends State<PerfilPaciente> {
                       child: CustomTextField(
                         labelText: "Etnia",
                         controller: etniaController,
-                        initialValue:
-                            getInitialValue(dados[pacienteId], 'etnia'),
+                        initialValue: getInitialValue(pacienteData, 'etnia'),
+                        //enabled: isEditing,
                       ),
                     ),
                     Expanded(
@@ -187,8 +273,8 @@ class _PerfilPacienteState extends State<PerfilPaciente> {
                       child: CustomTextField(
                         labelText: "Altura",
                         controller: alturaController,
-                        initialValue:
-                            getInitialValue(dados[pacienteId], 'altura'),
+                        initialValue: getInitialValue(pacienteData, 'altura'),
+                        //enabled: isEditing,
                       ),
                     ),
                     Expanded(
@@ -196,8 +282,8 @@ class _PerfilPacienteState extends State<PerfilPaciente> {
                       child: CustomTextField(
                         labelText: "Peso",
                         controller: pesoController,
-                        initialValue:
-                            getInitialValue(dados[pacienteId], 'peso'),
+                        initialValue: getInitialValue(pacienteData, 'peso'),
+                        //enabled: isEditing,
                       ),
                     ),
                   ],
@@ -209,8 +295,8 @@ class _PerfilPacienteState extends State<PerfilPaciente> {
                       child: CustomTextField(
                         labelText: "Religião",
                         controller: religiaoController,
-                        initialValue:
-                            getInitialValue(dados[pacienteId], 'religiao'),
+                        initialValue: getInitialValue(pacienteData, 'religiao'),
+                        //enabled: isEditing,
                       ),
                     ),
                     Expanded(
@@ -218,8 +304,8 @@ class _PerfilPacienteState extends State<PerfilPaciente> {
                       child: CustomTextField(
                         labelText: "Estado civil",
                         controller: estadoCivilController,
-                        initialValue:
-                            getInitialValue(dados[pacienteId], 'estadoCivil'),
+                        initialValue: getInitialValue(pacienteData, 'estadoCivil'),
+                        //enabled: isEditing,
                       ),
                     ),
                   ],
@@ -227,7 +313,8 @@ class _PerfilPacienteState extends State<PerfilPaciente> {
                 CustomTextField(
                   labelText: "Profissões e horário de trabalho",
                   controller: profissaoController,
-                  initialValue: getInitialValue(dados[pacienteId], 'profissao'),
+                  initialValue: getInitialValue(pacienteData, 'profissao'),
+                  //enabled: isEditing,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -244,41 +331,96 @@ class _PerfilPacienteState extends State<PerfilPaciente> {
                 CustomTextField(
                   labelText: "Email",
                   controller: emailController,
-                  initialValue: getInitialValue(dados[pacienteId], 'email'),
+                  initialValue: getInitialValue(pacienteData, 'email'),
+                  //enabled: isEditing,
+                ),
+                CustomTextField(
+                  labelText: "Telefone Residencial",
+                  controller: telefoneResidencialController,
+                  initialValue: getInitialValue(pacienteData, 'telefoneResidencial'),
+                  //enabled: isEditing,
                 ),
                 CustomTextField(
                   labelText: "Telefone Celular",
                   controller: telefoneCelularController,
-                  initialValue:
-                      getInitialValue(dados[pacienteId], 'telefoneCelular'),
+                  initialValue: getInitialValue(pacienteData, 'telefoneCelular'),
+                  //enabled: isEditing,
                 ),
-                
-                const SizedBox(height: 30),
-                SizedBox(
-                  width: double.infinity,
-                  height: 40,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/anamnese");
-                    },
-                    style: ElevatedButton.styleFrom(
-                      textStyle: const TextStyle(fontSize: 20.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    child: const Text(
-                      'Anamneses',
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    'Endereço',
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Montserrat',
+                      color: Color(0xFF00A896),
                     ),
                   ),
                 ),
-              ]),
+                CustomTextField(
+                  labelText: "Endereço",
+                  controller: enderecoController,
+                  initialValue: getInitialValue(pacienteData, 'endereco'),
+                  //enabled: isEditing,
+                ),
+                CustomTextField(
+                  labelText: "Complemento",
+                  controller: complementoController,
+                  initialValue: getInitialValue(pacienteData, 'complemento'),
+                  //enabled: isEditing,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: CustomTextField(
+                        labelText: "Bairro",
+                        controller: bairroController,
+                        initialValue: getInitialValue(pacienteData, 'bairro'),
+                        //enabled: isEditing,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: CustomTextField(
+                        labelText: "Cidade",
+                        controller: cidadeController,
+                        initialValue: getInitialValue(pacienteData, 'cidade'),
+                        //enabled: isEditing,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: CustomTextField(
+                        labelText: "Estado",
+                        controller: estadoController,
+                        initialValue: getInitialValue(pacienteData, 'estado'),
+                        //enabled: isEditing,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: toggleEditing,
+                  child: Text(
+                    isEditing ? 'Salvar' : 'Editar',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _toggleEditing,
-        child: Globals.isEditing ? Icon(Icons.save) : Icon(Icons.edit),
-      ),);
+      ),
+    );
+  }
+
+  String getInitialValue(Map<String, dynamic> data, String field) {
+    return data[field] != null ? data[field].toString() : '';
   }
 }
