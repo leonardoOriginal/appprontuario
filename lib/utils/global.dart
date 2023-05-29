@@ -1,4 +1,4 @@
 class Globals {
-  static int pacienteId = 0;
+  static int id = 0;
   static bool isEditing = false;
 }

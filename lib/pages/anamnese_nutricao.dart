@@ -58,7 +58,7 @@ class _AnamneseNutricaoPageState extends State<AnamneseNutricaoPage> {
   TextEditingController suplementosController = TextEditingController();
   TextEditingController anabolizantesController = TextEditingController();
 
-  final pacienteId = Globals.pacienteId;
+  final id = Globals.id;
 
   String getInitialValue(Map<String, dynamic> data, String key) {
     return data[key] != null ? data[key].toString() : '';
@@ -66,50 +66,50 @@ class _AnamneseNutricaoPageState extends State<AnamneseNutricaoPage> {
 
   void _toggleEditing() {
     if (Globals.isEditing) {
-      dados[pacienteId]['email'] = emailController.text;
-      dados[pacienteId]['nomeCompleto'] = nomeCompletoController.text;
-      dados[pacienteId]['dataNascimento'] = dataNascimentoController.text;
-      dados[pacienteId]['peso'] = pesoController.text;
-      dados[pacienteId]['altura'] = alturaController.text;
-      dados[pacienteId]['fezDieta'] = fezDietaController.text;
-      dados[pacienteId]['tempoDieta'] = tempoDietaController.text;
-      dados[pacienteId]['tipoDieta'] = tipoDietaController.text;
-      dados[pacienteId]['desistiuDieta'] = desistiuDietaController.text;
-      dados[pacienteId]['preferenciaAlimentar'] =
+      dados[id]['email'] = emailController.text;
+      dados[id]['nomeCompleto'] = nomeCompletoController.text;
+      dados[id]['dataNascimento'] = dataNascimentoController.text;
+      dados[id]['peso'] = pesoController.text;
+      dados[id]['altura'] = alturaController.text;
+      dados[id]['fezDieta'] = fezDietaController.text;
+      dados[id]['tempoDieta'] = tempoDietaController.text;
+      dados[id]['tipoDieta'] = tipoDietaController.text;
+      dados[id]['desistiuDieta'] = desistiuDietaController.text;
+      dados[id]['preferenciaAlimentar'] =
           preferenciaAlimentarController.text;
-      dados[pacienteId]['aversaoAlimentar'] = aversaoAlimentarController.text;
-      dados[pacienteId]['alteracoesApetite'] = alteracoesApetiteController.text;
-      dados[pacienteId]['refeicoesDia'] = refeicoesDiaController.text;
-      dados[pacienteId]['tempoRefeicoes'] = tempoRefeicoesController.text;
-      dados[pacienteId]['tomarCafeManha'] = tomarCafeManhaController.text;
-      dados[pacienteId]['dietaEspecial'] = dietaEspecialController.text;
-      dados[pacienteId]['preparoRefeicoes'] = preparoRefeicoesController.text;
-      dados[pacienteId]['localRefeicoes'] = localRefeicoesController.text;
-      dados[pacienteId]['intestinoDiario'] = intestinoDiarioController.text;
-      dados[pacienteId]['intestinoFrequencia'] =
+      dados[id]['aversaoAlimentar'] = aversaoAlimentarController.text;
+      dados[id]['alteracoesApetite'] = alteracoesApetiteController.text;
+      dados[id]['refeicoesDia'] = refeicoesDiaController.text;
+      dados[id]['tempoRefeicoes'] = tempoRefeicoesController.text;
+      dados[id]['tomarCafeManha'] = tomarCafeManhaController.text;
+      dados[id]['dietaEspecial'] = dietaEspecialController.text;
+      dados[id]['preparoRefeicoes'] = preparoRefeicoesController.text;
+      dados[id]['localRefeicoes'] = localRefeicoesController.text;
+      dados[id]['intestinoDiario'] = intestinoDiarioController.text;
+      dados[id]['intestinoFrequencia'] =
           intestinoFrequenciaController.text;
-      dados[pacienteId]['descontroleComida'] = descontroleComidaController.text;
-      dados[pacienteId]['situacaoDescontrole'] =
+      dados[id]['descontroleComida'] = descontroleComidaController.text;
+      dados[id]['situacaoDescontrole'] =
           situacaoDescontroleController.text;
-      dados[pacienteId]['consumoDejejuns'] = consumoDejejunsController.text;
-      dados[pacienteId]['consumoColacao'] = consumoColacaoController.text;
-      dados[pacienteId]['consumoAlmoco'] = consumoAlmocoController.text;
-      dados[pacienteId]['consumoLancheTarde'] =
+      dados[id]['consumoDejejuns'] = consumoDejejunsController.text;
+      dados[id]['consumoColacao'] = consumoColacaoController.text;
+      dados[id]['consumoAlmoco'] = consumoAlmocoController.text;
+      dados[id]['consumoLancheTarde'] =
           consumoLancheTardeController.text;
-      dados[pacienteId]['consumoJantar'] = consumoJantarController.text;
-      dados[pacienteId]['consumoCeia'] = consumoCeiaController.text;
-      dados[pacienteId]['intoleranciaAlimentar'] =
+      dados[id]['consumoJantar'] = consumoJantarController.text;
+      dados[id]['consumoCeia'] = consumoCeiaController.text;
+      dados[id]['intoleranciaAlimentar'] =
           intoleranciaAlimentarController.text;
-      dados[pacienteId]['consumoCarnes'] = consumoCarnesController.text;
-      dados[pacienteId]['consumoIntegrais'] = consumoIntegraisController.text;
-      dados[pacienteId]['consumoPeixes'] = consumoPeixesController.text;
-      dados[pacienteId]['consumoAgua'] = consumoAguaController.text;
-      dados[pacienteId]['consumoBebidas'] = consumoBebidasController.text;
-      dados[pacienteId]['energia'] = energiaController.text;
-      dados[pacienteId]['consumoFrutas'] = consumoFrutasController.text;
-      dados[pacienteId]['lancheSaudaveis'] = lancheSaudaveisController.text;
-      dados[pacienteId]['suplementos'] = suplementosController.text;
-      dados[pacienteId]['anabolizantes'] = anabolizantesController.text;
+      dados[id]['consumoCarnes'] = consumoCarnesController.text;
+      dados[id]['consumoIntegrais'] = consumoIntegraisController.text;
+      dados[id]['consumoPeixes'] = consumoPeixesController.text;
+      dados[id]['consumoAgua'] = consumoAguaController.text;
+      dados[id]['consumoBebidas'] = consumoBebidasController.text;
+      dados[id]['energia'] = energiaController.text;
+      dados[id]['consumoFrutas'] = consumoFrutasController.text;
+      dados[id]['lancheSaudaveis'] = lancheSaudaveisController.text;
+      dados[id]['suplementos'] = suplementosController.text;
+      dados[id]['anabolizantes'] = anabolizantesController.text;
 
       setState(() {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -153,11 +153,11 @@ class _AnamneseNutricaoPageState extends State<AnamneseNutricaoPage> {
                 CircleAvatar(
                   radius: 45, // Define o raio do avatar
                   backgroundImage:
-                      NetworkImage(dados[pacienteId]['foto'].toString()),
+                      NetworkImage(dados[id]['foto'].toString()),
                 ),
                 SizedBox(height: 15),
                 Text(
-                  dados[pacienteId]['nomeCompleto'].toString(),
+                  dados[id]['nomeCompleto'].toString(),
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.w900,
@@ -216,223 +216,223 @@ class _AnamneseNutricaoPageState extends State<AnamneseNutricaoPage> {
                             labelText: "Email",
                             controller: emailController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'email'),
+                                getInitialValue(dados[id], 'email'),
                           ),
                           CustomTextField(
                             labelText: "Nome Completo",
                             controller: nomeCompletoController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'nomeCompleto'),
+                                dados[id], 'nomeCompleto'),
                           ),
                           CustomTextField(
                             labelText: "Data de Nascimento",
                             controller: dataNascimentoController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'dataNascimento'),
+                                dados[id], 'dataNascimento'),
                           ),
                           CustomTextField(
                             labelText: "Peso",
                             controller: pesoController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'peso'),
+                                getInitialValue(dados[id], 'peso'),
                           ),
                           CustomTextField(
                             labelText: "Altura",
                             controller: alturaController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'altura'),
+                                getInitialValue(dados[id], 'altura'),
                           ),
                           CustomTextField(
                             labelText: "Fez Alguma dieta?",
                             controller: fezDietaController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'fezDieta'),
+                                getInitialValue(dados[id], 'fezDieta'),
                           ),
                           CustomTextField(
                             labelText: "Se sim, há quanto tempo?",
                             controller: tempoDietaController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'tempoDieta'),
+                                dados[id], 'tempoDieta'),
                           ),
                           CustomTextField(
                             labelText: "Tipo de dieta que fez",
                             controller: tipoDietaController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'tipodieta'),
+                                getInitialValue(dados[id], 'tipodieta'),
                           ),
                           CustomTextField(
                             labelText: "Porque desistiu",
                             controller: desistiuDietaController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'desistiuDieta'),
+                                dados[id], 'desistiuDieta'),
                           ),
                           CustomTextField(
                             labelText: "Preferência Alimentar",
                             controller: preferenciaAlimentarController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'preferenciaAlimentar'),
+                                dados[id], 'preferenciaAlimentar'),
                           ),
                           CustomTextField(
                             labelText: "Aversão Alimentar",
                             controller: aversaoAlimentarController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'aversaoAlimentar'),
+                                dados[id], 'aversaoAlimentar'),
                           ),
                           CustomTextField(
                             labelText: "Alterações do Apetite",
                             controller: alteracoesApetiteController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'alteracoesApetite'),
+                                dados[id], 'alteracoesApetite'),
                           ),
                           CustomTextField(
                             labelText: "Refeições por dia",
                             controller: refeicoesDiaController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'refeicoesDia'),
+                                dados[id], 'refeicoesDia'),
                           ),
                           CustomTextField(
                             labelText: "Tem tempo para fazer suas refeições?",
                             controller: tempoRefeicoesController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'tempoRefeicoes'),
+                                dados[id], 'tempoRefeicoes'),
                           ),
                           CustomTextField(
                             labelText: "Toma café da manhã diariamente?",
                             controller: tomarCafeManhaController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'tomarCafeManha'),
+                                dados[id], 'tomarCafeManha'),
                           ),
                           CustomTextField(
                             labelText: "Atualmente segue uma dieta especial?",
                             controller: dietaEspecialController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'dietaEspecial'),
+                                dados[id], 'dietaEspecial'),
                           ),
                           CustomTextField(
                             labelText: "Quem prepara as refeições?",
                             controller: preparoRefeicoesController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'preparoRefeicoes'),
+                                dados[id], 'preparoRefeicoes'),
                           ),
                           CustomTextField(
                             labelText: "Onde realiza as refeições?",
                             controller: localRefeicoesController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'localRefeicoes'),
+                                dados[id], 'localRefeicoes'),
                           ),
                           CustomTextField(
                             labelText: "Seu instestino funciona todos dias?",
                             controller: intestinoDiarioController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'intestinoDiario'),
+                                dados[id], 'intestinoDiario'),
                           ),
                           CustomTextField(
                             labelText:
                                 "Caso não, com qual frequencia funciona?",
                             controller: intestinoFrequenciaController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'intestinoFrequencia'),
+                                dados[id], 'intestinoFrequencia'),
                           ),
                           CustomTextField(
                             labelText: "Tem descontrole em relação a comida?",
                             controller: descontroleComidaController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'descontroleComida'),
+                                dados[id], 'descontroleComida'),
                           ),
                           CustomTextField(
                             labelText:
                                 "Qual situação ou comida que causa isso?",
                             controller: situacaoDescontroleController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'situacaoDescontrole'),
+                                dados[id], 'situacaoDescontrole'),
                           ),
                           CustomTextField(
                             labelText: "Como são as refeições de dejejuns?",
                             controller: consumoDejejunsController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'consumoDejejuns'),
+                                dados[id], 'consumoDejejuns'),
                           ),
                           CustomTextField(
                             labelText: "Como são as refeições de colação?",
                             controller: consumoColacaoController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'consumoColacao'),
+                                dados[id], 'consumoColacao'),
                           ),
                           CustomTextField(
                             labelText: "Como são as refeições de Almoço?",
                             controller: consumoAlmocoController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'consumoAlmoco'),
+                                dados[id], 'consumoAlmoco'),
                           ),
                           CustomTextField(
                             labelText:
                                 "Como são as refeições de Lanche da tarde?",
                             controller: consumoLancheTardeController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'consumoLancheTarde'),
+                                dados[id], 'consumoLancheTarde'),
                           ),
                           CustomTextField(
                             labelText: "Como são as refeições de Jantar?",
                             controller: consumoJantarController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'consumoJantar'),
+                                dados[id], 'consumoJantar'),
                           ),
                           CustomTextField(
                             labelText: "Como são as refeições de Ceia?",
                             controller: consumoCeiaController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'consumoCeia'),
+                                dados[id], 'consumoCeia'),
                           ),
                           CustomTextField(
                             labelText: "Possui intolerância alimentar? Qual?",
                             controller: intoleranciaAlimentarController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'intoleranciaAlimentar'),
+                                dados[id], 'intoleranciaAlimentar'),
                           ),
                           CustomTextField(
                             labelText: "Qual seu consumo diário de água ?",
                             controller: consumoAguaController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'consumoAgua'),
+                                dados[id], 'consumoAgua'),
                           ),
                           CustomTextField(
                             labelText: "Qual o consumo de bebidas açucaradas",
                             controller: consumoBebidasController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'consumoBebidas'),
+                                dados[id], 'consumoBebidas'),
                           ),
                           CustomTextField(
                             labelText:
                                 "Possui energia para realizar suas atividades?",
                             controller: energiaController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'energia'),
+                                getInitialValue(dados[id], 'energia'),
                           ),
                           CustomTextField(
                             labelText:
                                 "Consumo de frutas, legumes, verduras no dia",
                             controller: consumoFrutasController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'consumoFrutas'),
+                                dados[id], 'consumoFrutas'),
                           ),
                           CustomTextField(
                             labelText:
                                 "Possui habito de fazer lanches saudaveis ",
                             controller: lancheSaudaveisController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'lancheSaudaveis'),
+                                dados[id], 'lancheSaudaveis'),
                           ),
                           CustomTextField(
                             labelText: "Você usa suplementos? Quais ?",
                             controller: suplementosController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'suplementos'),
+                                dados[id], 'suplementos'),
                           ),
                           CustomTextField(
                             labelText: "Você usa anabolizantes? Quais?",
                             controller: anabolizantesController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'anabolizantes'),
+                                dados[id], 'anabolizantes'),
                           ),
                         ],
                       ),

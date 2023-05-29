@@ -70,7 +70,7 @@ class _AnamneseGeralPageState extends State<AnamneseGeralPage> {
   TextEditingController fumanteController = TextEditingController();
   TextEditingController frequenciaAlcoolicaController = TextEditingController();
 
-  final pacienteId = Globals.pacienteId;
+  final id = Globals.id;
 
   String getInitialValue(Map<String, dynamic> data, String key) {
     return data[key] != null ? data[key].toString() : '';
@@ -78,64 +78,64 @@ class _AnamneseGeralPageState extends State<AnamneseGeralPage> {
 
   void _toggleEditing() {
     if (Globals.isEditing) {
-      dados[pacienteId]['email'] = emailController.text;
-      dados[pacienteId]['nomeCompleto'] = nomeCompletoController.text;
-      dados[pacienteId]['dataNascimento'] = dataNascimentoController.text;
-      dados[pacienteId]['idade'] = idadeController.text;
-      dados[pacienteId]['genero'] = generoController.text;
-      dados[pacienteId]['profissao'] = profissaoController.text;
-      dados[pacienteId]['estadoCivil'] = estadoCivilController.text;
-      dados[pacienteId]['etnia'] = etniaController.text;
-      dados[pacienteId]['religiao'] = religiaoController.text;
-      dados[pacienteId]['naturalidade'] = naturalidadeController.text;
-      dados[pacienteId]['endereco'] = enderecoController.text;
-      dados[pacienteId]['bairro'] = bairroController.text;
-      dados[pacienteId]['cidade'] = cidadeController.text;
-      dados[pacienteId]['telefoneResidencial'] =
+      dados[id]['email'] = emailController.text;
+      dados[id]['nomeCompleto'] = nomeCompletoController.text;
+      dados[id]['dataNascimento'] = dataNascimentoController.text;
+      dados[id]['idade'] = idadeController.text;
+      dados[id]['genero'] = generoController.text;
+      dados[id]['profissao'] = profissaoController.text;
+      dados[id]['estadoCivil'] = estadoCivilController.text;
+      dados[id]['etnia'] = etniaController.text;
+      dados[id]['religiao'] = religiaoController.text;
+      dados[id]['naturalidade'] = naturalidadeController.text;
+      dados[id]['endereco'] = enderecoController.text;
+      dados[id]['bairro'] = bairroController.text;
+      dados[id]['cidade'] = cidadeController.text;
+      dados[id]['telefoneResidencial'] =
           telefoneResidencialController.text;
-      dados[pacienteId]['telefoneCelular'] = telefoneCelularController.text;
-      dados[pacienteId]['escolaridade'] = escolaridadeController.text;
-      dados[pacienteId]['trabalhaAtualmente'] =
+      dados[id]['telefoneCelular'] = telefoneCelularController.text;
+      dados[id]['escolaridade'] = escolaridadeController.text;
+      dados[id]['trabalhaAtualmente'] =
           trabalhaAtualmenteController.text;
-      dados[pacienteId]['trabalhoAtivoParado'] =
+      dados[id]['trabalhoAtivoParado'] =
           trabalhoAtivoParadoController.text;
-      dados[pacienteId]['habitos'] = habitosController.text;
-      dados[pacienteId]['rendaFamiliar'] = rendaFamiliarController.text;
-      dados[pacienteId]['pressaoArterial'] = pressaoArterialController.text;
-      dados[pacienteId]['frequenciaCardiaca'] =
+      dados[id]['habitos'] = habitosController.text;
+      dados[id]['rendaFamiliar'] = rendaFamiliarController.text;
+      dados[id]['pressaoArterial'] = pressaoArterialController.text;
+      dados[id]['frequenciaCardiaca'] =
           frequenciaCardiacaController.text;
-      dados[pacienteId]['glicemiaCapilar'] = glicemiaCapilarController.text;
-      dados[pacienteId]['pulso'] = pulsoController.text;
-      dados[pacienteId]['temperatura'] = temperaturaController.text;
-      dados[pacienteId]['saturacao'] = saturacaoController.text;
-      dados[pacienteId]['frequenciaRespiratoria'] =
+      dados[id]['glicemiaCapilar'] = glicemiaCapilarController.text;
+      dados[id]['pulso'] = pulsoController.text;
+      dados[id]['temperatura'] = temperaturaController.text;
+      dados[id]['saturacao'] = saturacaoController.text;
+      dados[id]['frequenciaRespiratoria'] =
           frequenciaRespiratoriaController.text;
-      dados[pacienteId]['dores'] = doresController.text;
-      dados[pacienteId]['queixaPrincipal'] = queixaPrincipalController.text;
-      dados[pacienteId]['patologias'] = patologiasController.text;
-      dados[pacienteId]['antecedentes'] = antecedentesController.text;
-      dados[pacienteId]['condicoesGerais'] = condicoesGeraisController.text;
-      dados[pacienteId]['marcapasso'] = marcapassoController.text;
-      dados[pacienteId]['anticoncepcional'] = anticoncepcionalController.text;
-      dados[pacienteId]['cicloMenstrual'] = cicloMenstrualController.text;
-      dados[pacienteId]['gestante'] = gestanteController.text;
-      dados[pacienteId]['filhos'] = filhosController.text;
-      dados[pacienteId]['alergias'] = alergiasController.text;
-      dados[pacienteId]['proteses'] = protesesController.text;
-      dados[pacienteId]['sono'] = sonoController.text;
-      dados[pacienteId]['funcionamentoIntestinal'] =
+      dados[id]['dores'] = doresController.text;
+      dados[id]['queixaPrincipal'] = queixaPrincipalController.text;
+      dados[id]['patologias'] = patologiasController.text;
+      dados[id]['antecedentes'] = antecedentesController.text;
+      dados[id]['condicoesGerais'] = condicoesGeraisController.text;
+      dados[id]['marcapasso'] = marcapassoController.text;
+      dados[id]['anticoncepcional'] = anticoncepcionalController.text;
+      dados[id]['cicloMenstrual'] = cicloMenstrualController.text;
+      dados[id]['gestante'] = gestanteController.text;
+      dados[id]['filhos'] = filhosController.text;
+      dados[id]['alergias'] = alergiasController.text;
+      dados[id]['proteses'] = protesesController.text;
+      dados[id]['sono'] = sonoController.text;
+      dados[id]['funcionamentoIntestinal'] =
           funcionamentoIntestinalController.text;
-      dados[pacienteId]['eliminacaoFisiologica'] =
+      dados[id]['eliminacaoFisiologica'] =
           eliminacaoFisiologicaController.text;
-      dados[pacienteId]['locomocao'] = locomocaoController.text;
-      dados[pacienteId]['tendenciaGanhoPeso'] =
+      dados[id]['locomocao'] = locomocaoController.text;
+      dados[id]['tendenciaGanhoPeso'] =
           tendenciaGanhoPesoController.text;
-      dados[pacienteId]['efGeral'] = efGeralController.text;
-      dados[pacienteId]['efOlhos'] = efOlhosController.text;
-      dados[pacienteId]['efPescoco'] = efPescocoController.text;
-      dados[pacienteId]['estadoHigiene'] = estadoHigieneController.text;
-      dados[pacienteId]['fumante'] = fumanteController.text;
-      dados[pacienteId]['frequenciaAlcoolica'] =
+      dados[id]['efGeral'] = efGeralController.text;
+      dados[id]['efOlhos'] = efOlhosController.text;
+      dados[id]['efPescoco'] = efPescocoController.text;
+      dados[id]['estadoHigiene'] = estadoHigieneController.text;
+      dados[id]['fumante'] = fumanteController.text;
+      dados[id]['frequenciaAlcoolica'] =
           frequenciaAlcoolicaController.text;
 
       setState(() {
@@ -180,11 +180,11 @@ class _AnamneseGeralPageState extends State<AnamneseGeralPage> {
                 CircleAvatar(
                   radius: 45, // Define o raio do avatar
                   backgroundImage:
-                      NetworkImage(dados[pacienteId]['foto'].toString()),
+                      NetworkImage(dados[id]['foto'].toString()),
                 ),
                 SizedBox(height: 15),
                 Text(
-                  dados[pacienteId]['nomeCompleto'].toString(),
+                  dados[id]['nomeCompleto'].toString(),
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.w900,
@@ -243,305 +243,305 @@ class _AnamneseGeralPageState extends State<AnamneseGeralPage> {
                             labelText: "Email",
                             controller: emailController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'email'),
+                                getInitialValue(dados[id], 'email'),
                           ),
                           CustomTextField(
                             labelText: "Nome Completo",
                             controller: nomeCompletoController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'nomeCompleto'),
+                                dados[id], 'nomeCompleto'),
                           ),
                           CustomTextField(
                             labelText: "Data de Nascimento",
                             controller: dataNascimentoController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'dataNascimento'),
+                                dados[id], 'dataNascimento'),
                           ),
                           CustomTextField(
                             labelText: "Idade",
                             controller: idadeController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'idade'),
+                                getInitialValue(dados[id], 'idade'),
                           ),
                           CustomTextField(
                             labelText: "Genero",
                             controller: generoController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'genero'),
+                                getInitialValue(dados[id], 'genero'),
                           ),
                           CustomTextField(
                             labelText: "Profissões e horário de trabalho",
                             controller: profissaoController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'profissao'),
+                                getInitialValue(dados[id], 'profissao'),
                           ),
                           CustomTextField(
                             labelText: "Estado civil",
                             controller: estadoCivilController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'estadoCivil'),
+                                dados[id], 'estadoCivil'),
                           ),
                           CustomTextField(
                             labelText: "Etnia",
                             controller: etniaController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'etnia'),
+                                getInitialValue(dados[id], 'etnia'),
                           ),
                           CustomTextField(
                             labelText: "Religião",
                             controller: religiaoController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'religiao'),
+                                getInitialValue(dados[id], 'religiao'),
                           ),
                           CustomTextField(
                             labelText: "Naturalidade",
                             controller: naturalidadeController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'naturalidade'),
+                                dados[id], 'naturalidade'),
                           ),
                           CustomTextField(
                             labelText: "Endereço",
                             controller: enderecoController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'endereco'),
+                                getInitialValue(dados[id], 'endereco'),
                           ),
                           CustomTextField(
                             labelText: "Bairro",
                             controller: bairroController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'bairro'),
+                                getInitialValue(dados[id], 'bairro'),
                           ),
                           CustomTextField(
                             labelText: "Cidade",
                             controller: cidadeController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'cidade'),
+                                getInitialValue(dados[id], 'cidade'),
                           ),
                           CustomTextField(
                             labelText: "Telefone Residencial",
                             controller: telefoneResidencialController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'telefoneResidencial'),
+                                dados[id], 'telefoneResidencial'),
                           ),
                           CustomTextField(
                             labelText: "Telefone Celular",
                             controller: telefoneCelularController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'telefoneCelular'),
+                                dados[id], 'telefoneCelular'),
                           ),
                           CustomTextField(
                             labelText: "Escolaridade",
                             controller: escolaridadeController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'escolaridade'),
+                                dados[id], 'escolaridade'),
                           ),
                           CustomTextField(
                             labelText: "Trabalha Atualmente",
                             controller: trabalhaAtualmenteController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'trabalhaAtualmente'),
+                                dados[id], 'trabalhaAtualmente'),
                           ),
                           CustomTextField(
                             labelText: "Seu trabalho é ativo ou parado?",
                             controller: trabalhoAtivoParadoController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'trabalhoAtivoParado'),
+                                dados[id], 'trabalhoAtivoParado'),
                           ),
                           CustomTextField(
                             labelText: "Hábitos",
                             controller: habitosController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'Hábitos'),
+                                getInitialValue(dados[id], 'Hábitos'),
                           ),
                           CustomTextField(
                             labelText: "Renda Familiar",
                             controller: rendaFamiliarController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'rendaFamiliar'),
+                                dados[id], 'rendaFamiliar'),
                           ),
                           CustomTextField(
                             labelText: "Pressão Arterial",
                             controller: pressaoArterialController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'pressaoArterial'),
+                                dados[id], 'pressaoArterial'),
                           ),
                           CustomTextField(
                             labelText: "Frequência Cardiaca",
                             controller: frequenciaCardiacaController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'frequenciaCardiaca'),
+                                dados[id], 'frequenciaCardiaca'),
                           ),
                           CustomTextField(
                             labelText: "Glicemia Capilar",
                             controller: glicemiaCapilarController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'glicemiaCapilar'),
+                                dados[id], 'glicemiaCapilar'),
                           ),
                           CustomTextField(
                             labelText: "Pulso",
                             controller: pulsoController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'pulso'),
+                                getInitialValue(dados[id], 'pulso'),
                           ),
                           CustomTextField(
                             labelText: "Temperatura",
                             controller: temperaturaController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'temperatura'),
+                                dados[id], 'temperatura'),
                           ),
                           CustomTextField(
                             labelText: "Saturação",
                             controller: saturacaoController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'saturacao'),
+                                getInitialValue(dados[id], 'saturacao'),
                           ),
                           CustomTextField(
                             labelText: "Frequência Respiratória",
                             controller: frequenciaRespiratoriaController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'frequenciaRespiratoria'),
+                                dados[id], 'frequenciaRespiratoria'),
                           ),
                           CustomTextField(
                             labelText: "Possui dor(es) ? Quais ?",
                             controller: doresController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'dores'),
+                                getInitialValue(dados[id], 'dores'),
                           ),
                           CustomTextField(
                             labelText: "Queixa principal",
                             controller: queixaPrincipalController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'queixaPrincipal'),
+                                dados[id], 'queixaPrincipal'),
                           ),
                           CustomTextField(
                             labelText:
                                 "Patologias pregressas / Cirurgias Anteriores",
                             controller: patologiasController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'patologias'),
+                                dados[id], 'patologias'),
                           ),
                           CustomTextField(
                             labelText: "Antecedentes familiares",
                             controller: antecedentesController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'antecedentes'),
+                                dados[id], 'antecedentes'),
                           ),
                           CustomTextField(
                             labelText:
                                 "Condições gerais, medicamentos de uso continuo",
                             controller: condicoesGeraisController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'condicoesGerais'),
+                                dados[id], 'condicoesGerais'),
                           ),
                           CustomTextField(
                             labelText: "Portador de marcapasso ?",
                             controller: marcapassoController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'marcapasso'),
+                                dados[id], 'marcapasso'),
                           ),
                           CustomTextField(
                             labelText: "Faz uso de anticoncepcional ? Qual ?",
                             controller: anticoncepcionalController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'anticoncepcional'),
+                                dados[id], 'anticoncepcional'),
                           ),
                           CustomTextField(
                             labelText: "Possui ciclo menstrual regular ?",
                             controller: cicloMenstrualController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'cicloMenstrual'),
+                                dados[id], 'cicloMenstrual'),
                           ),
                           CustomTextField(
                             labelText: "Gestante ?",
                             controller: gestanteController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'gestante'),
+                                getInitialValue(dados[id], 'gestante'),
                           ),
                           CustomTextField(
                             labelText: "Possui filhos ? Quantos ?",
                             controller: filhosController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'filhos'),
+                                getInitialValue(dados[id], 'filhos'),
                           ),
                           CustomTextField(
                             labelText: "Alergias",
                             controller: alergiasController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'alergias'),
+                                getInitialValue(dados[id], 'alergias'),
                           ),
                           CustomTextField(
                             labelText: "Uso de próteses",
                             controller: protesesController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'proteses'),
+                                getInitialValue(dados[id], 'proteses'),
                           ),
                           CustomTextField(
                             labelText: "Sono e Repouso? Horas por dia",
                             controller: sonoController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'sono'),
+                                getInitialValue(dados[id], 'sono'),
                           ),
                           CustomTextField(
                             labelText: "Funcionamento intestinal é regular ?",
                             controller: funcionamentoIntestinalController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'funcionamentoIntestinal'),
+                                dados[id], 'funcionamentoIntestinal'),
                           ),
                           CustomTextField(
                             labelText: "Eliminição Fisiológica",
                             controller: eliminacaoFisiologicaController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'eliminacaoFisiologica'),
+                                dados[id], 'eliminacaoFisiologica'),
                           ),
                           CustomTextField(
                             labelText: "Locomoção",
                             controller: locomocaoController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'locomocao'),
+                                getInitialValue(dados[id], 'locomocao'),
                           ),
                           CustomTextField(
                             labelText: "Tendência de ganho de peso",
                             controller: tendenciaGanhoPesoController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'tendenciaGanhoPeso'),
+                                dados[id], 'tendenciaGanhoPeso'),
                           ),
                           CustomTextField(
                             labelText: "Exame Fisico: Estado Geral",
                             controller: efGeralController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'efGeral'),
+                                getInitialValue(dados[id], 'efGeral'),
                           ),
                           CustomTextField(
                             labelText: "E F: Olhos, Ouvidos, Boca e Nariz",
                             controller: efOlhosController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'efOlhos'),
+                                getInitialValue(dados[id], 'efOlhos'),
                           ),
                           CustomTextField(
                             labelText:
                                 "E F: Pescoço, Respiração, Circulação e Pele",
                             controller: efPescocoController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'efPescoco'),
+                                getInitialValue(dados[id], 'efPescoco'),
                           ),
                           CustomTextField(
                             labelText: "Estado de higiene",
                             controller: estadoHigieneController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'estadoHigiene'),
+                                dados[id], 'estadoHigiene'),
                           ),
                           CustomTextField(
                             labelText: "Fumante",
                             controller: fumanteController,
                             initialValue:
-                                getInitialValue(dados[pacienteId], 'fumante'),
+                                getInitialValue(dados[id], 'fumante'),
                           ),
                           CustomTextField(
                             labelText:
                                 "Sua frequência do uso de bebida alcoólica",
                             controller: frequenciaAlcoolicaController,
                             initialValue: getInitialValue(
-                                dados[pacienteId], 'frequenciaAlcoolica'),
+                                dados[id], 'frequenciaAlcoolica'),
                           ),
                         ],
                       ),

@@ -132,7 +132,7 @@ class _PacientesState extends State<Pacientes> {
                 return GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, '/perfil_paciente');
-                    Globals.pacienteId =
+                    Globals.id =
                         int.parse(filteredPacientes[index]['id']);
                   },
                   child: Container(
