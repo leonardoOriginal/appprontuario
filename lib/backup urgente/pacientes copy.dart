@@ -131,16 +131,11 @@ class _PacientesState extends State<Pacientes> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    final pacienteId = filteredPacientes[index]['id'] as String;
-                    if (pacienteId != null) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PerfilPaciente(pacienteId: pacienteId),
-                        ),
-                      );
-                    }
-                    else {print(pacienteId);}
+                    Navigator.pushNamed(
+                      context,
+                      '/perfil_paciente',
+                      arguments: filteredPacientes[index]['id'], // Passa a ID como argumento
+                    );
                   },
                   child: Container(
                     child: Padding(

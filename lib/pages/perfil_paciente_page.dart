@@ -4,92 +4,60 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class PerfilPaciente extends StatefulWidget {
-  final int id;
+  final String pacienteId;
 
-  const PerfilPaciente({Key? key, required this.id}) : super(key: key);
+  PerfilPaciente({required this.pacienteId});
 
   @override
   _PerfilPacienteState createState() => _PerfilPacienteState();
 }
 
 class _PerfilPacienteState extends State<PerfilPaciente> {
-  Map<String, dynamic>? pacienteData;
-
-  Future<Map<String, dynamic>?> getPacienteDataFromFirebase(int id) async {
-    final response = await http.get(Uri.parse('https://loginfirebase-fe7e7-default-rtdb.firebaseio.com/pacientes/$id.json'));
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      if (data != null && data is Map<String, dynamic>) {
-        return data;
-      }
-    }
-    return null;
-  }
-
-
-
+  Map<String, dynamic> paciente = {};
 
   @override
   void initState() {
     super.initState();
+    getPacienteFromFirebase();
+  }
 
-    getPacienteDataFromFirebase(widget.id)
-        .then((pacienteData) {
+  Future<void> getPacienteFromFirebase() async {
+    final response = await http.get(
+      Uri.parse('https://loginfirebase-fe7e7-default-rtdb.firebaseio.com/pacientes/${widget.pacienteId}.json'),
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
       setState(() {
-        this.pacienteData = pacienteData;
+        paciente = data;
       });
-    })
-        .catchError((error) {
-      print('Erro ao obter dados do paciente do Firebase: $error');
-    });
+    } else {
+      throw Exception('Erro ao obter dados do paciente. Status code: ${response.statusCode}');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (pacienteData == null) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Perfil do Paciente'),
-        ),
-        body: const Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    } else {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Perfil do Paciente'),
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Nome: ${pacienteData!['nomeCompleto'] ?? 'Dados indisponíveis'}',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Idade: ${pacienteData!['idade'] ?? 'Dados indisponíveis'}',
-                  style: const TextStyle(fontSize: 16),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Data de Nascimento: ${pacienteData!['dataNascimento'] ?? 'Dados indisponíveis'}',
-                  style: const TextStyle(fontSize: 16),
-                ),
-                // Adicione outras informações do paciente aqui
-              ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Perfil do Paciente'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Nome: ${paciente['nomeCompleto']}',
+              style: TextStyle(fontSize: 24),
             ),
-          ),
+            Text(
+              'Idade: ${paciente['idade']}',
+              style: TextStyle(fontSize: 24),
+            ),
+            // Restante dos detalhes do paciente...
+          ],
         ),
-      );
-    }
+      ),
+    );
   }
 }

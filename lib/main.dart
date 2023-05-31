@@ -21,7 +21,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     final ThemeData telaPrincipal = ThemeData();
@@ -33,18 +33,18 @@ class MyApp extends StatelessWidget {
               secondary: const Color.fromRGBO(2, 128, 144, 100))),
       initialRoute: "/login",
       routes: {
-        "/login": (context) => LoginPage(),
-        "/home": (context) => HomePage(),
+        "/login": (context) => const LoginPage(),
+        "/home": (context) => const HomePage(),
         "/pacientes": (context) => Pacientes(),
-        "/cadastro_pacientes": (context) => CadastroPacientes(),
-        "/calendario": (context) => CalendarPage(),
+        "/cadastro_pacientes": (context) => const CadastroPacientes(),
+        "/calendario": (context) => const CalendarPage(),
         "/anamnese": (context) => AnamnesePage(),
-        "/perfil_paciente": (context) => PerfilPaciente(id: 0),
-        "/anamnese_geral": (context) => AnamneseGeralPage(),
-        "/anamnese_nutricao": (context) => AnamneseNutricaoPage(),
-        "/anamnese_psicologia": (context) => AnamnesePsicologiaPage(),
-        "/anamnese_farmacia": (context) => AnamneseFarmaciaPage(),
-        "/anamnese_educacao_fisica": (context) => AnamneseEducacaoFisicaPage(),
+        "/perfil_paciente": (context) => PerfilPaciente(pacienteId: ''),
+        "/anamnese_geral": (context) => const AnamneseGeralPage(),
+        "/anamnese_nutricao": (context) => const AnamneseNutricaoPage(),
+        "/anamnese_psicologia": (context) => const AnamnesePsicologiaPage(),
+        "/anamnese_farmacia": (context) => const AnamneseFarmaciaPage(),
+        "/anamnese_educacao_fisica": (context) => const AnamneseEducacaoFisicaPage(),
         "/cadastro_consulta": (context) => CadastroConsulta(),
       },
     );
